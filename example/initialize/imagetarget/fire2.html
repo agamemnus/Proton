@@ -74,11 +74,11 @@
 				emitter.addInitialize(new Proton.Mass(1));
 				emitter.addInitialize(new Proton.Life(2, 3.9));
 				emitter.addInitialize(new Proton.Velocity(new Proton.Span(1, 1.5), new Proton.Span(180, 2, true), 'polar'));
-				//emitter.addBehaviour(new Proton.RandomDrift(10, 10, .1));
-				emitter.addBehaviour(new Proton.Alpha(0.62, 0));
-				emitter.addBehaviour(new Proton.Scale([2.5, 2], [0, .1]));
-				emitter.addBehaviour(new Proton.G(0.6));
-				emitter.addBehaviour(new Proton.Color('#FF4F00', '#FF4F00', Infinity, Proton.easeInSine));
+				//emitter.addBehavior(new Proton.RandomDrift(10, 10, .1));
+				emitter.addBehavior(new Proton.Alpha(0.62, 0));
+				emitter.addBehavior(new Proton.Scale([2.5, 2], [0, .1]));
+				emitter.addBehavior(new Proton.G(0.6));
+				emitter.addBehavior(new Proton.Color('#FF4F00', '#FF4F00', Infinity, Proton.easeInSine));
 				emitter.p.x = canvas.width / 2;
 				emitter.p.y = canvas.height / 2 - 150;
 				emitter.emit();

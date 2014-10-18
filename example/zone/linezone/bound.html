@@ -68,16 +68,16 @@
 				emitter.addInitialize(new Proton.Life(7, 8));
 				emitter.addInitialize(new Proton.P(new Proton.CircleZone(0, 0, 30)));
 				emitter.addInitialize(new Proton.V(new Proton.Span(.5, 1), new Proton.Span(90, 50, true), 'polar'));
-				//add Behaviour
-				emitter.addBehaviour(new Proton.Scale(1, 0.5));
-				emitter.addBehaviour(new Proton.Color('#ffffff'));
-				emitter.addBehaviour(new Proton.Gravity(3.8));
+				//add Behavior
+				emitter.addBehavior(new Proton.Scale(1, 0.5));
+				emitter.addBehavior(new Proton.Color('#ffffff'));
+				emitter.addBehavior(new Proton.Gravity(3.8));
 				var crosszone1 = new Proton.CrossZone(new Proton.LineZone(0, 110, 300, 300), 'bound');
 				var crosszone2 = new Proton.CrossZone(new Proton.LineZone(300, 300, 400, 300), 'bound');
 				var crosszone3 = new Proton.CrossZone(new Proton.LineZone(400, 300, 600, 500), 'bound');
 				var crosszone4 = new Proton.CrossZone(new Proton.LineZone(600, 500, 1100, 550), 'bound');
 				var crosszone5 = new Proton.CrossZone(new Proton.RectZone(0, 0, 1013, 620), 'dead');
-				emitter.addBehaviour(crosszone1, crosszone2, crosszone3, crosszone4, crosszone5);
+				emitter.addBehavior(crosszone1, crosszone2, crosszone3, crosszone4, crosszone5);
 				emitter.p.x = x;
 				emitter.p.y = y;
 				emitter.emit();

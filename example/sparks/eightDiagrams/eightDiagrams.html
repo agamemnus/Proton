@@ -35,7 +35,7 @@
 			var emitter1, emitter2;
 			var stats;
 			var canvas;
-			var attractionBehaviours = [];
+			var attractionBehaviors = [];
 			var R = 150;
 			var tha = 0;
 			var mouseObj;
@@ -83,13 +83,13 @@
 				emitter.addInitialize(new Proton.Life(1));
 				emitter.addInitialize(new Proton.ImageTarget(['image/particle.png'], 32));
 				emitter.addInitialize(new Proton.Radius(40));
-				emitter.addBehaviour(new Proton.Alpha(1, 0));
-				emitter.addBehaviour(new Proton.Color(color1, color2));
-				emitter.addBehaviour(new Proton.Scale(3.5, 0.1));
-				emitter.addBehaviour(new Proton.CrossZone(new Proton.RectZone(0, 0, 1003, 610), 'dead'));
-				var attractionBehaviour = new Proton.Attraction(mouseObj, 0, 0);
-				attractionBehaviours.push(attractionBehaviour);
-				emitter.addBehaviour(attractionBehaviour);
+				emitter.addBehavior(new Proton.Alpha(1, 0));
+				emitter.addBehavior(new Proton.Color(color1, color2));
+				emitter.addBehavior(new Proton.Scale(3.5, 0.1));
+				emitter.addBehavior(new Proton.CrossZone(new Proton.RectZone(0, 0, 1003, 610), 'dead'));
+				var attractionBehavior = new Proton.Attraction(mouseObj, 0, 0);
+				attractionBehaviors.push(attractionBehavior);
+				emitter.addBehavior(attractionBehavior);
 
 				emitter.p.x = x;
 				emitter.p.y = y;
@@ -108,13 +108,13 @@
 
 			function mousedownHandler(e) {
 				for (var i = 0; i < 2; i++)
-					attractionBehaviours[i].reset(mouseObj, 120, 200);
+					attractionBehaviors[i].reset(mouseObj, 120, 200);
 			}
 
 			function mouseupHandler(e) {
 				setTimeout(function() {
 					for (var i = 0; i < 2; i++)
-						attractionBehaviours[i].reset(mouseObj, 0, 0);
+						attractionBehaviors[i].reset(mouseObj, 0, 0);
 				}, 1000);
 			}
 

@@ -70,11 +70,11 @@
 				emitter.addInitialize(new Proton.Position(new Proton.LineZone(0, -40, canvas.width, -40)));
 				emitter.addInitialize(new Proton.V(0, new Proton.Span(.1, 1)));
 
-				emitter.addBehaviour(new Proton.CrossZone(new Proton.LineZone(0, canvas.height, canvas.width, canvas.height + 20, 'down'), 'dead'));
-				emitter.addBehaviour(new Proton.Rotate(new Proton.Span(0, 360), new Proton.Span(-.5, .5), 'add'));
-				emitter.addBehaviour(new Proton.Scale(new Proton.Span(.2, 1)));
-				emitter.addBehaviour(new Proton.RandomDrift(5, 0, .15));
-				emitter.addBehaviour(new Proton.Gravity(0.9));
+				emitter.addBehavior(new Proton.CrossZone(new Proton.LineZone(0, canvas.height, canvas.width, canvas.height + 20, 'down'), 'dead'));
+				emitter.addBehavior(new Proton.Rotate(new Proton.Span(0, 360), new Proton.Span(-.5, .5), 'add'));
+				emitter.addBehavior(new Proton.Scale(new Proton.Span(.2, 1)));
+				emitter.addBehavior(new Proton.RandomDrift(5, 0, .15));
+				emitter.addBehavior(new Proton.Gravity(0.9));
 				emitter.emit();
 				proton.addEmitter(emitter);
 

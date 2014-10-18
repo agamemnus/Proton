@@ -186,8 +186,8 @@ $(function() {
 			fighterEmitter.addInitialize(new Proton.ImageTarget('fire'));
 			fighterEmitter.addInitialize(new Proton.Life(.8));
 			fighterEmitter.addInitialize(new Proton.Velocity(new Proton.Span(1, 2), new Proton.Span(180, 10, true), 'polar'));
-			fighterEmitter.addBehaviour(new Proton.Alpha(1, 0));
-			fighterEmitter.addBehaviour(new Proton.Scale(1, 0));
+			fighterEmitter.addBehavior(new Proton.Alpha(1, 0));
+			fighterEmitter.addBehavior(new Proton.Scale(1, 0));
 			proton.addEmitter(fighterEmitter);
 			fighterEmitter.emit();
 		}
@@ -201,8 +201,8 @@ $(function() {
 			bombEmitter.addInitialize(new Proton.ImageTarget('bomb'));
 			bombEmitter.addInitialize(new Proton.Life(.8));
 			bombEmitter.addInitialize(new Proton.Velocity(new Proton.Span(1, 2), new Proton.Span(0, 360), 'polar'));
-			bombEmitter.addBehaviour(new Proton.Alpha(1, 0));
-			bombEmitter.addBehaviour(new Proton.Scale(Proton.getSpan(1, 2), 0));
+			bombEmitter.addBehavior(new Proton.Alpha(1, 0));
+			bombEmitter.addBehavior(new Proton.Scale(Proton.getSpan(1, 2), 0));
 			proton.addEmitter(bombEmitter);
 		}
 

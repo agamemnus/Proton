@@ -22,7 +22,7 @@ var paths = {
 	"ColorSpan" : "math/ColorSpan",
 	"Rectangle" : "math/Rectangle",
 	"Mat3" : "math/Mat3",
-	"Behaviour" : "behaviour/Behaviour",
+	"Behavior" : "behavior/Behavior",
 
 	"Rate" : "initialize/Rate",
 	"Initialize" : "initialize/Initialize",
@@ -34,21 +34,21 @@ var paths = {
 	"Radius" : "initialize/Radius",
 	"ImageTarget" : "initialize/ImageTarget",
 
-	"Force" : "behaviour/Force",
-	"Attraction" : "behaviour/Attraction",
-	"RandomDrift" : "behaviour/RandomDrift",
-	"Repulsion" : "behaviour/Repulsion",
-	"Gravity" : "behaviour/Gravity",
-	"Collision" : "behaviour/Collision",
-	"CrossZone" : "behaviour/CrossZone",
-	"Alpha" : "behaviour/Alpha",
-	"Scale" : "behaviour/Scale",
-	"Rotate" : "behaviour/Rotate",
-	"Color" : "behaviour/Color",
-	"GravityWell" : "behaviour/GravityWell",
+	"Force" : "behavior/Force",
+	"Attraction" : "behavior/Attraction",
+	"RandomDrift" : "behavior/RandomDrift",
+	"Repulsion" : "behavior/Repulsion",
+	"Gravity" : "behavior/Gravity",
+	"Collision" : "behavior/Collision",
+	"CrossZone" : "behavior/CrossZone",
+	"Alpha" : "behavior/Alpha",
+	"Scale" : "behavior/Scale",
+	"Rotate" : "behavior/Rotate",
+	"Color" : "behavior/Color",
+	"GravityWell" : "behavior/GravityWell",
 
 	"Emitter" : "emitter/Emitter",
-	"BehaviourEmitter" : "emitter/BehaviourEmitter",
+	"BehaviorEmitter" : "emitter/BehaviorEmitter",
 	"FollowEmitter" : "emitter/FollowEmitter",
 
 	"ease" : "plus/ease",
@@ -131,7 +131,7 @@ for (var index in paths) {
 		shim[index] = {
 			deps : ["Proton", "InitializeUtil", "Event", "Util", "EventDispatcher", "Particle", "Rate"]
 		};
-	} else if (index == "BehaviourEmitter" || index == "FollowEmitter") {
+	} else if (index == "BehaviorEmitter" || index == "FollowEmitter") {
 		shim[index] = {
 			deps : ["Proton", "Util", "Emitter"]
 		};
@@ -154,14 +154,14 @@ for (var index in paths) {
 			deps : ["Proton", "Util", "Initialize"]
 		};
 	}
-	//*****************behaviour*****************//
-	else if (index == "Behaviour") {
+	//*****************behavior*****************//
+	else if (index == "Behavior") {
 		shim[index] = {
 			deps : ["Proton", "Util"]
 		};
 	} else if (index == "CrossZone" || index == "Attraction" || index == "Collision" || index == "Force" || index == "CrossZone" || index == "RandomDrift" || index == "Scale" || index == "Alpha" || index == "Rotate") {
 		shim[index] = {
-			deps : ["Proton", "Util", "Behaviour", "Vector2D"]
+			deps : ["Proton", "Util", "Behavior", "Vector2D"]
 		};
 	} else if (index == "Gravity") {
 		shim[index] = {

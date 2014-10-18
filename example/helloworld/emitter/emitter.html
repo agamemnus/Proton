@@ -62,9 +62,9 @@
 				emitter.addInitialize(new Proton.Radius(1, 12));
 				emitter.addInitialize(new Proton.Life(2, 4));
 				emitter.addInitialize(new Proton.Velocity(new Proton.Span(2, 4), new Proton.Span(-30, 30), 'polar'));
-				emitter.addBehaviour(new Proton.RandomDrift(30, 30, .05));
-				emitter.addBehaviour(new Proton.Color('ff0000', 'random', Infinity, Proton.easeOutQuart));
-				emitter.addBehaviour(new Proton.Scale(1, 0.7));
+				emitter.addBehavior(new Proton.RandomDrift(30, 30, .05));
+				emitter.addBehavior(new Proton.Color('ff0000', 'random', Infinity, Proton.easeOutQuart));
+				emitter.addBehavior(new Proton.Scale(1, 0.7));
 				emitter.p.x = canvas.width / 2;
 				emitter.p.y = canvas.height / 2;
 				emitter.emit();

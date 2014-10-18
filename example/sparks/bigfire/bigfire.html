@@ -65,8 +65,8 @@
 				emitter.addInitialize(new Proton.Position(new Proton.CircleZone(canvas.width / 2, canvas.height / 2 + 200, 10)));
 				emitter.addInitialize(new Proton.Life(5, 7));
 				emitter.addInitialize(new Proton.V(new Proton.Span(2, 3), new Proton.Span(0, 30, true), 'polar'));
-				emitter.addBehaviour(new Proton.Scale(1, .2));
-				emitter.addBehaviour(new Proton.Alpha(1, .2));
+				emitter.addBehavior(new Proton.Scale(1, .2));
+				emitter.addBehavior(new Proton.Alpha(1, .2));
 				emitter.emit();
 				proton.addEmitter(emitter);
 

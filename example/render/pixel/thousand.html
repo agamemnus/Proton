@@ -99,10 +99,10 @@
 				emitter.addInitialize(new Proton.Mass(1));
 				emitter.addInitialize(new Proton.Life(3, 6));
 				emitter.addInitialize(new Proton.V(new Proton.Span(0.5, 1), new Proton.Span(90, 10, true), 'polar'));
-				emitter.addBehaviour(new Proton.Alpha(1, 0));
-				emitter.addBehaviour(new Proton.Color(color));
-				emitter.addBehaviour(new Proton.Attraction(mouseObj, 10, 500));
-				emitter.addBehaviour(new Proton.CrossZone(new Proton.RectZone(0, 0, 1003, 610), 'cross'));
+				emitter.addBehavior(new Proton.Alpha(1, 0));
+				emitter.addBehavior(new Proton.Color(color));
+				emitter.addBehavior(new Proton.Attraction(mouseObj, 10, 500));
+				emitter.addBehavior(new Proton.CrossZone(new Proton.RectZone(0, 0, 1003, 610), 'cross'));
 				emitter.p.x = x;
 				emitter.p.y = y;
 				emitter.emit();

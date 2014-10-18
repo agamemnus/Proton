@@ -53,7 +53,7 @@
 					v : new Proton.Vector2D(),
 					a : new Proton.Vector2D()
 				};
-				this.behaviours = [];
+				this.behaviors = [];
 			} else {
 				Proton.Util.destroyObject(this.transform);
 				this.p.set(0, 0);
@@ -62,7 +62,7 @@
 				this.old.p.set(0, 0);
 				this.old.v.set(0, 0);
 				this.old.a.set(0, 0);
-				this.removeAllBehaviours();
+				this.removeAllBehaviors();
 			}
 
 			this.transform.rgb = {
@@ -76,17 +76,17 @@
 		update : function(time, index) {
 			if (!this.sleep) {
 				this.age += time;
-				var length = this.behaviours.length, i;
+				var length = this.behaviors.length, i;
 				for ( i = 0; i < length; i++) {
-					if (this.behaviours[i])
-						this.behaviours[i].applyBehaviour(this, time, index)
+					if (this.behaviors[i])
+						this.behaviors[i].applyBehavior(this, time, index)
 				}
 			} else {
 
 			}
 
 			if (this.age >= this.life) {
-				this.destory();
+				this.destroy();
 			} else {
 				var scale = this.easing(this.age / this.life);
 				this.energy = Math.max(1 - scale, 0);
@@ -94,37 +94,37 @@
 
 		},
 
-		addBehaviour : function(behaviour) {
-			this.behaviours.push(behaviour);
-			if (behaviour.hasOwnProperty('parents'))
-				behaviour.parents.push(this);
-			behaviour.initialize(this);
+		addBehavior : function(behavior) {
+			this.behaviors.push(behavior);
+			if (behavior.hasOwnProperty('parents'))
+				behavior.parents.push(this);
+			behavior.initialize(this);
 		},
 
-		addBehaviours : function(behaviours) {
-			var length = behaviours.length, i;
+		addBehaviors : function(behaviors) {
+			var length = behaviors.length, i;
 			for ( i = 0; i < length; i++) {
-				this.addBehaviour(behaviours[i]);
+				this.addBehavior(behaviors[i]);
 			}
 		},
 
-		removeBehaviour : function(behaviour) {
-			var index = this.behaviours.indexOf(behaviour);
+		removeBehavior : function(behavior) {
+			var index = this.behaviors.indexOf(behavior);
 			if (index > -1) {
-				var behaviour = this.behaviours.splice(index, 1);
-				behaviour.parents = null;
+				var behavior = this.behaviors.splice(index, 1);
+				behavior.parents = null;
 			}
 		},
 
-		removeAllBehaviours : function() {
-			Proton.Util.destroyArray(this.behaviours);
+		removeAllBehaviors : function() {
+			Proton.Util.destroyArray(this.behaviors);
 		},
 		/**
-		 * Destory this particle
-		 * @method destory
+		 * Destroy this particle
+		 * @method destroy
 		 */
-		destory : function() {
-			this.removeAllBehaviours();
+		destroy : function() {
+			this.removeAllBehaviors();
 			this.energy = 0;
 			this.dead = true;
 			this.parent = null;

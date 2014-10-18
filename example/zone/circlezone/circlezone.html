@@ -75,13 +75,13 @@
 				emitter.addInitialize(new Proton.Life(8, 15));
 				emitter.addInitialize(new Proton.Position(new Proton.CircleZone(canvas.width / 2, canvas.height / 2, 100)));
 				emitter.addInitialize(new Proton.Velocity(new Proton.Span(2, 4), new Proton.Span(0, 360), 'polar'));
-				//add behaviour
+				//add behavior
 
-				emitter.addBehaviour(new Proton.Alpha(1, 0),new Proton.Color('random'));
-				emitter.addBehaviour(new Proton.Scale(Proton.getSpan(.2, 1)));
-				emitter.addBehaviour(new Proton.RandomDrift(10, 10, .05));
+				emitter.addBehavior(new Proton.Alpha(1, 0),new Proton.Color('random'));
+				emitter.addBehavior(new Proton.Scale(Proton.getSpan(.2, 1)));
+				emitter.addBehavior(new Proton.RandomDrift(10, 10, .05));
 				var crosszone = new Proton.CrossZone(new Proton.CircleZone(canvas.width / 2, canvas.height / 2, 280), 'bound');
-				emitter.addBehaviour(crosszone);
+				emitter.addBehavior(crosszone);
 				emitter.emit();
 				proton.addEmitter(emitter);
 

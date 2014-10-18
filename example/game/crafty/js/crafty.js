@@ -8046,10 +8046,10 @@ Crafty.c("Particles", {
 	*	// Angle is calculated clockwise: 12pm is 0deg, 3pm is 90deg etc.
 	*	angle: 65,
 	*	angleRandom: 34,
-	*	startColour: [255, 131, 0, 1],
-	*	startColourRandom: [48, 50, 45, 0],
-	*	endColour: [245, 35, 0, 0],
-	*	endColourRandom: [60, 60, 60, 0],
+	*	startColor: [255, 131, 0, 1],
+	*	startColorRandom: [48, 50, 45, 0],
+	*	endColor: [245, 35, 0, 0],
+	*	endColorRandom: [60, 60, 60, 0],
 	*	// Only applies when fastMode is off, specifies how sharp the gradients are drawn
 	*	sharpness: 20,
 	*	sharpnessRandom: 10,
@@ -8140,10 +8140,10 @@ Crafty.c("Particles", {
 			// Angle is calculated clockwise: 12pm is 0deg, 3pm is 90deg etc.
 			angle: 65,
 			angleRandom: 34,
-			startColour: [255, 131, 0, 1],
-			startColourRandom: [48, 50, 45, 0],
-			endColour: [245, 35, 0, 0],
-			endColourRandom: [60, 60, 60, 0],
+			startColor: [255, 131, 0, 1],
+			startColorRandom: [48, 50, 45, 0],
+			endColor: [245, 35, 0, 0],
+			endColorRandom: [60, 60, 60, 0],
 			// Only applies when fastMode is off, specifies how sharp the gradients are drawn
 			sharpness: 20,
 			sharpnessRandom: 10,
@@ -8217,24 +8217,24 @@ Crafty.c("Particles", {
 			// internal circle gradient size - affects the sharpness of the radial gradient
 			particle.sizeSmall = ~~((particle.size / 200) * particle.sharpness); //(size/2/100)
 			var start = [
-				this.startColour[0] + this.startColourRandom[0] * this.RANDM1TO1(),
-				this.startColour[1] + this.startColourRandom[1] * this.RANDM1TO1(),
-				this.startColour[2] + this.startColourRandom[2] * this.RANDM1TO1(),
-				this.startColour[3] + this.startColourRandom[3] * this.RANDM1TO1()
+				this.startColor[0] + this.startColorRandom[0] * this.RANDM1TO1(),
+				this.startColor[1] + this.startColorRandom[1] * this.RANDM1TO1(),
+				this.startColor[2] + this.startColorRandom[2] * this.RANDM1TO1(),
+				this.startColor[3] + this.startColorRandom[3] * this.RANDM1TO1()
 				];
 
 			var end = [
-				this.endColour[0] + this.endColourRandom[0] * this.RANDM1TO1(),
-				this.endColour[1] + this.endColourRandom[1] * this.RANDM1TO1(),
-				this.endColour[2] + this.endColourRandom[2] * this.RANDM1TO1(),
-				this.endColour[3] + this.endColourRandom[3] * this.RANDM1TO1()
+				this.endColor[0] + this.endColorRandom[0] * this.RANDM1TO1(),
+				this.endColor[1] + this.endColorRandom[1] * this.RANDM1TO1(),
+				this.endColor[2] + this.endColorRandom[2] * this.RANDM1TO1(),
+				this.endColor[3] + this.endColorRandom[3] * this.RANDM1TO1()
 				];
 
-			particle.colour = start;
-			particle.deltaColour[0] = (end[0] - start[0]) / particle.timeToLive;
-			particle.deltaColour[1] = (end[1] - start[1]) / particle.timeToLive;
-			particle.deltaColour[2] = (end[2] - start[2]) / particle.timeToLive;
-			particle.deltaColour[3] = (end[3] - start[3]) / particle.timeToLive;
+			particle.color = start;
+			particle.deltaColor[0] = (end[0] - start[0]) / particle.timeToLive;
+			particle.deltaColor[1] = (end[1] - start[1]) / particle.timeToLive;
+			particle.deltaColor[2] = (end[2] - start[2]) / particle.timeToLive;
+			particle.deltaColor[3] = (end[3] - start[3]) / particle.timeToLive;
 		},
 		update: function () {
 			if (this.active && this.emissionRate > 0) {
@@ -8270,11 +8270,11 @@ Crafty.c("Particles", {
 					}
 					currentParticle.timeToLive--;
 
-					// Update colours
-					var r = currentParticle.colour[0] += currentParticle.deltaColour[0];
-					var g = currentParticle.colour[1] += currentParticle.deltaColour[1];
-					var b = currentParticle.colour[2] += currentParticle.deltaColour[2];
-					var a = currentParticle.colour[3] += currentParticle.deltaColour[3];
+					// Update colors
+					var r = currentParticle.color[0] += currentParticle.deltaColor[0];
+					var g = currentParticle.color[1] += currentParticle.deltaColor[1];
+					var b = currentParticle.color[2] += currentParticle.deltaColor[2];
+					var a = currentParticle.color[3] += currentParticle.deltaColor[3];
 
 					// Calculate the rgba string to draw.
 					draw = [];
@@ -8282,11 +8282,11 @@ Crafty.c("Particles", {
 					draw.push(g > 255 ? 255 : g < 0 ? 0 : ~~g);
 					draw.push(b > 255 ? 255 : b < 0 ? 0 : ~~b);
 					draw.push((a > 1 ? 1 : a < 0 ? 0 : a.toFixed(2)) + ")");
-					currentParticle.drawColour = draw.join(",");
+					currentParticle.drawColor = draw.join(",");
 
 					if (!this.fastMode) {
 						draw[3] = "0)";
-						currentParticle.drawColourEnd = draw.join(",");
+						currentParticle.drawColorEnd = draw.join(",");
 					}
 
 					this.particleIndex++;
@@ -8331,12 +8331,12 @@ Crafty.c("Particles", {
 				var y = ~~particle.position.y;
 
 				if (this.fastMode) {
-					context.fillStyle = particle.drawColour;
+					context.fillStyle = particle.drawColor;
 				} else {
 					var radgrad = context.createRadialGradient(x + halfSize, y + halfSize, particle.sizeSmall, x + halfSize, y + halfSize, halfSize);
-					radgrad.addColorStop(0, particle.drawColour);
+					radgrad.addColorStop(0, particle.drawColor);
 					//0.9 to avoid visible boxing
-					radgrad.addColorStop(0.9, particle.drawColourEnd);
+					radgrad.addColorStop(0.9, particle.drawColorEnd);
 					context.fillStyle = radgrad;
 				}
 				context.fillRect(x, y, size, size);
@@ -8348,9 +8348,9 @@ Crafty.c("Particles", {
 			this.size = 0;
 			this.sizeSmall = 0;
 			this.timeToLive = 0;
-			this.colour = [];
-			this.drawColour = "";
-			this.deltaColour = [];
+			this.color = [];
+			this.drawColor = "";
+			this.deltaColor = [];
 			this.sharpness = 0;
 		},
 		vectorHelpers: {

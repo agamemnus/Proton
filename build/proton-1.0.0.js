@@ -129,10 +129,10 @@
 			return total;
 		},
 
-		destory : function() {
+		destroy : function() {
 			var length = this.emitters.length;
 			for (var i = 0; i < length; i++) {
-				this.emitters[i].destory();
+				this.emitters[i].destroy();
 				delete this.emitters[i];
 			}
 
@@ -642,7 +642,7 @@
 					v : new Proton.Vector2D(),
 					a : new Proton.Vector2D()
 				};
-				this.behaviours = [];
+				this.behaviors = [];
 			} else {
 				Proton.Util.destroyObject(this.transform);
 				this.p.set(0, 0);
@@ -651,7 +651,7 @@
 				this.old.p.set(0, 0);
 				this.old.v.set(0, 0);
 				this.old.a.set(0, 0);
-				this.removeAllBehaviours();
+				this.removeAllBehaviors();
 			}
 
 			this.transform.rgb = {
@@ -665,17 +665,17 @@
 		update : function(time, index) {
 			if (!this.sleep) {
 				this.age += time;
-				var length = this.behaviours.length, i;
+				var length = this.behaviors.length, i;
 				for ( i = 0; i < length; i++) {
-					if (this.behaviours[i])
-						this.behaviours[i].applyBehaviour(this, time, index)
+					if (this.behaviors[i])
+						this.behaviors[i].applyBehavior(this, time, index)
 				}
 			} else {
 
 			}
 
 			if (this.age >= this.life) {
-				this.destory();
+				this.destroy();
 			} else {
 				var scale = this.easing(this.age / this.life);
 				this.energy = Math.max(1 - scale, 0);
@@ -683,37 +683,37 @@
 
 		},
 
-		addBehaviour : function(behaviour) {
-			this.behaviours.push(behaviour);
-			if (behaviour.hasOwnProperty('parents'))
-				behaviour.parents.push(this);
-			behaviour.initialize(this);
+		addBehavior : function(behavior) {
+			this.behaviors.push(behavior);
+			if (behavior.hasOwnProperty('parents'))
+				behavior.parents.push(this);
+			behavior.initialize(this);
 		},
 
-		addBehaviours : function(behaviours) {
-			var length = behaviours.length, i;
+		addBehaviors : function(behaviors) {
+			var length = behaviors.length, i;
 			for ( i = 0; i < length; i++) {
-				this.addBehaviour(behaviours[i]);
+				this.addBehavior(behaviors[i]);
 			}
 		},
 
-		removeBehaviour : function(behaviour) {
-			var index = this.behaviours.indexOf(behaviour);
+		removeBehavior : function(behavior) {
+			var index = this.behaviors.indexOf(behavior);
 			if (index > -1) {
-				var behaviour = this.behaviours.splice(index, 1);
-				behaviour.parents = null;
+				var behavior = this.behaviors.splice(index, 1);
+				behavior.parents = null;
 			}
 		},
 
-		removeAllBehaviours : function() {
-			Proton.Util.destroyArray(this.behaviours);
+		removeAllBehaviors : function() {
+			Proton.Util.destroyArray(this.behaviors);
 		},
 		/**
-		 * Destory this particle
-		 * @method destory
+		 * Destroy this particle
+		 * @method destroy
 		 */
-		destory : function() {
-			this.removeAllBehaviours();
+		destroy : function() {
+			this.removeAllBehaviors();
 			this.energy = 0;
 			this.dead = true;
 			this.parent = null;
@@ -766,8 +766,8 @@
 		},
 		release : function() {
 			for (var i = 0; i < this.poolList.length; i++) {
-				if (this.poolList[i]['destory'])
-					this.poolList[i].destory();
+				if (this.poolList[i]['destroy'])
+					this.poolList[i].destroy();
 				delete this.poolList[i];
 			}
 			this.poolList = [];
@@ -1385,23 +1385,23 @@
 
 
 
-	Behaviour.id = 0;
+	Behavior.id = 0;
 	/**
-	 * The Behaviour class is the base for the other Behaviour
+	 * The Behavior class is the base for the other Behavior
 	 *
-	 * @class Behaviour
+	 * @class Behavior
 	 * @constructor
 	 */
-	function Behaviour(life, easing) {
+	function Behavior(life, easing) {
 		/**
-		 * The behaviour's id;
+		 * The behavior's id;
 		 * @property id
 		 * @type {String} id
 		 */
-		this.id = 'Behaviour_' + Behaviour.id++;
+		this.id = 'Behavior_' + Behavior.id++;
 		this.life = Proton.Util.initValue(life, Infinity);
 		/**
-		 * The behaviour's decaying trend, for example Proton.easeOutQuart;
+		 * The behavior's decaying trend, for example Proton.easeOutQuart;
 		 * @property easing
 		 * @type {String}
 		 * @default Proton.easeLinear
@@ -1410,33 +1410,33 @@
 		this.age = 0;
 		this.energy = 1;
 		/**
-		 * The behaviour is Dead;
+		 * The behavior is Dead;
 		 * @property dead
 		 * @type {Boolean}
 		 */
 		this.dead = false;
 		/**
-		 * The behaviour's parents array;
+		 * The behavior's parents array;
 		 * @property parents
 		 * @type {Array}
 		 */
 		this.parents = [];
 		/**
-		 * The behaviour name;
+		 * The behavior name;
 		 * @property name
 		 * @type {string}
 		 */
-		this.name = 'Behaviour';
+		this.name = 'Behavior';
 	}
 
 
-	Behaviour.prototype = {
+	Behavior.prototype = {
 		/**
-		 * Reset this behaviour's parameters
+		 * Reset this behavior's parameters
 		 *
 		 * @method reset
-		 * @param {Number} this behaviour's life
-		 * @param {String} this behaviour's easing
+		 * @param {Number} this behavior's life
+		 * @param {String} this behavior's easing
 		 */
 		reset : function(life, easing) {
 			this.life = Proton.Util.initValue(life, Infinity);
@@ -1463,7 +1463,7 @@
 		},
 
 		/**
-		 * Initialize the behaviour's parameters for all particles
+		 * Initialize the behavior's parameters for all particles
 		 *
 		 * @method initialize
 		 * @param {Proton.Particle} particle
@@ -1472,19 +1472,19 @@
 		},
 		
 		/**
-		 * Apply this behaviour for all particles every time
+		 * Apply this behavior for all particles every time
 		 *
-		 * @method applyBehaviour
+		 * @method applyBehavior
 		 * @param {Proton.Particle} particle
 		 * @param {Number} the integrate time 1/ms
 		 * @param {Int} the particle index
 		 */
-		applyBehaviour : function(particle, time, index) {
+		applyBehavior : function(particle, time, index) {
 			this.age += time;
 			if (this.age >= this.life || this.dead) {
 				this.energy = 0;
 				this.dead = true;
-				this.destory();
+				this.destroy();
 			} else {
 				var scale = this.easing(particle.age / particle.life);
 				this.energy = Math.max(1 - scale, 0);
@@ -1492,21 +1492,21 @@
 		},
 		
 		/**
-		 * Destory this behaviour
-		 * @method destory
+		 * Destroy this behavior
+		 * @method destroy
 		 */
-		destory : function() {
+		destroy : function() {
 			var index;
 			var length = this.parents.length, i;
 			for ( i = 0; i < length; i++) {
-				this.parents[i].removeBehaviour(this);
+				this.parents[i].removeBehavior(this);
 			}
 
 			this.parents = [];
 		}
 	};
 
-	Proton.Behaviour = Behaviour;
+	Proton.Behavior = Behavior;
 
 
 
@@ -1770,15 +1770,15 @@
 	}
 
 
-	Proton.Util.inherits(Force, Proton.Behaviour);
+	Proton.Util.inherits(Force, Proton.Behavior);
 	Force.prototype.reset = function(fx, fy, life, easing) {
 		this.force = this.normalizeForce(new Proton.Vector2D(fx, fy));
 		if (life)
 			Force._super_.prototype.reset.call(this, life, easing);
 	}
 
-	Force.prototype.applyBehaviour = function(particle, time, index) {
-		Force._super_.prototype.applyBehaviour.call(this, particle, time, index);
+	Force.prototype.applyBehavior = function(particle, time, index) {
+		Force._super_.prototype.applyBehavior.call(this, particle, time, index);
 		particle.a.add(this.force);
 	};
 
@@ -1799,7 +1799,7 @@
 	}
 
 
-	Proton.Util.inherits(Attraction, Proton.Behaviour);
+	Proton.Util.inherits(Attraction, Proton.Behavior);
 	Attraction.prototype.reset = function(targetPosition, force, radius, life, easing) {
 		this.targetPosition = Proton.Util.initValue(targetPosition, new Proton.Vector2D);
 		this.radius = Proton.Util.initValue(radius, 1000);
@@ -1811,8 +1811,8 @@
 			Attraction._super_.prototype.reset.call(this, life, easing);
 	}
 
-	Attraction.prototype.applyBehaviour = function(particle, time, index) {
-		Attraction._super_.prototype.applyBehaviour.call(this, particle, time, index);
+	Attraction.prototype.applyBehavior = function(particle, time, index) {
+		Attraction._super_.prototype.applyBehavior.call(this, particle, time, index);
 		this.attractionForce.copy(this.targetPosition);
 		this.attractionForce.sub(particle.p);
 		this.lengthSq = this.attractionForce.lengthSq();
@@ -1837,7 +1837,7 @@
 	}
 
 
-	Proton.Util.inherits(RandomDrift, Proton.Behaviour);
+	Proton.Util.inherits(RandomDrift, Proton.Behavior);
 	RandomDrift.prototype.reset = function(driftX, driftY, delay, life, easing) {
 		this.panFoce = new Proton.Vector2D(driftX, driftY);
 		this.panFoce = this.normalizeForce(this.panFoce);
@@ -1846,8 +1846,8 @@
 			RandomDrift._super_.prototype.reset.call(this, life, easing);
 	}
 
-	RandomDrift.prototype.applyBehaviour = function(particle, time, index) {
-		RandomDrift._super_.prototype.applyBehaviour.call(this, particle, time, index);
+	RandomDrift.prototype.applyBehavior = function(particle, time, index) {
+		RandomDrift._super_.prototype.applyBehavior.call(this, particle, time, index);
 		this.time += time;
 		if (this.time >= this.delay) {
 			
@@ -1900,7 +1900,7 @@
 	}
 
 
-	Proton.Util.inherits(Collision, Proton.Behaviour);
+	Proton.Util.inherits(Collision, Proton.Behavior);
 	Collision.prototype.reset = function(emitter, mass, callback, life, easing) {
 		this.emitter = Proton.Util.initValue(emitter, null);
 		this.mass = Proton.Util.initValue(mass, true);
@@ -1911,7 +1911,7 @@
 			Collision._super_.prototype.reset.call(this, life, easing);
 	}
 
-	Collision.prototype.applyBehaviour = function(particle, time, index) {
+	Collision.prototype.applyBehavior = function(particle, time, index) {
 		var newPool = this.emitter ? this.emitter.particles.slice(index) : this.pool.slice(index);
 		var otherParticle;
 		var lengthSq;
@@ -1954,7 +1954,7 @@
 	}
 
 
-	Proton.Util.inherits(CrossZone, Proton.Behaviour);
+	Proton.Util.inherits(CrossZone, Proton.Behavior);
 	CrossZone.prototype.reset = function(zone, crossType, life, easing) {
 		this.zone = zone;
 		this.zone.crossType = Proton.Util.initValue(crossType, "dead");
@@ -1962,8 +1962,8 @@
 			CrossZone._super_.prototype.reset.call(this, life, easing);
 	}
 
-	CrossZone.prototype.applyBehaviour = function(particle, time, index) {
-		CrossZone._super_.prototype.applyBehaviour.call(this, particle, time, index);
+	CrossZone.prototype.applyBehavior = function(particle, time, index) {
+		CrossZone._super_.prototype.applyBehavior.call(this, particle, time, index);
 		this.zone.crossing(particle);
 	};
 
@@ -1975,7 +1975,7 @@
 		Alpha._super_.call(this, life, easing);
 		this.reset(a, b);
 		/**
-		 * The Behaviour name;
+		 * The Behavior name;
 		 * @property name
 		 * @type {string}
 		 */
@@ -1983,7 +1983,7 @@
 	}
 
 
-	Proton.Util.inherits(Alpha, Proton.Behaviour);
+	Proton.Util.inherits(Alpha, Proton.Behavior);
 	Alpha.prototype.reset = function(a, b, life, easing) {
 		if (b == null || b == undefined)
 			this.same = true;
@@ -2003,8 +2003,8 @@
 			particle.transform.alphaB = this.b.getValue();
 	};
 
-	Alpha.prototype.applyBehaviour = function(particle, time, index) {
-		Alpha._super_.prototype.applyBehaviour.call(this, particle, time, index);
+	Alpha.prototype.applyBehavior = function(particle, time, index) {
+		Alpha._super_.prototype.applyBehavior.call(this, particle, time, index);
 		particle.alpha = particle.transform.alphaB + (particle.transform.alphaA - particle.transform.alphaB) * this.energy;
 		if (particle.alpha < 0.001)
 			particle.alpha = 0;
@@ -2021,7 +2021,7 @@
 	}
 
 
-	Proton.Util.inherits(Scale, Proton.Behaviour);
+	Proton.Util.inherits(Scale, Proton.Behavior);
 	Scale.prototype.reset = function(a, b, life, easing) {
 		if (b == null || b == undefined)
 			this.same = true;
@@ -2043,8 +2043,8 @@
 
 	};
 
-	Scale.prototype.applyBehaviour = function(particle, time, index) {
-		Scale._super_.prototype.applyBehaviour.call(this, particle, time, index);
+	Scale.prototype.applyBehavior = function(particle, time, index) {
+		Scale._super_.prototype.applyBehavior.call(this, particle, time, index);
 		particle.scale = particle.transform.scaleB + (particle.transform.scaleA - particle.transform.scaleB) * this.energy;
 		if (particle.scale < 0.0001)
 			particle.scale = 0;
@@ -2062,7 +2062,7 @@
 	}
 
 
-	Proton.Util.inherits(Rotate, Proton.Behaviour);
+	Proton.Util.inherits(Rotate, Proton.Behavior);
 	Rotate.prototype.reset = function(a, b, style, life, easing) {
 		if (b == null || b == undefined)
 			this.same = true;
@@ -2082,8 +2082,8 @@
 			particle.transform.rotationB = this.b.getValue();
 	};
 
-	Rotate.prototype.applyBehaviour = function(particle, time, index) {
-		Rotate._super_.prototype.applyBehaviour.call(this, particle, time, index);
+	Rotate.prototype.applyBehavior = function(particle, time, index) {
+		Rotate._super_.prototype.applyBehavior.call(this, particle, time, index);
 		if (!this.same) {
 			if (this.style == 'to' || this.style == 'TO' || this.style == '_') {
 				particle.rotation += particle.transform.rotationB + (particle.transform.rotationA - particle.transform.rotationB) * this.energy
@@ -2107,7 +2107,7 @@
 	}
 
 
-	Proton.Util.inherits(Color, Proton.Behaviour);
+	Proton.Util.inherits(Color, Proton.Behavior);
 	Color.prototype.reset = function(color1, color2, life, easing) {
 		this.color1 = this.setSpanValue(color1);
 		this.color2 = this.setSpanValue(color2);
@@ -2123,9 +2123,9 @@
 			particle.transform.endRGB = Proton.Util.hexToRGB(this.color2.getValue());
 	};
 
-	Color.prototype.applyBehaviour = function(particle, time, index) {
+	Color.prototype.applyBehavior = function(particle, time, index) {
 		if (this.color2) {
-			Color._super_.prototype.applyBehaviour.call(this, particle, time, index);
+			Color._super_.prototype.applyBehavior.call(this, particle, time, index);
 			particle.transform.rgb.r = particle.transform.endRGB.r + (particle.transform.beginRGB.r - particle.transform.endRGB.r) * this.energy;
 			particle.transform.rgb.g = particle.transform.endRGB.g + (particle.transform.beginRGB.g - particle.transform.endRGB.g) * this.energy;
 			particle.transform.rgb.b = particle.transform.endRGB.b + (particle.transform.beginRGB.b - particle.transform.endRGB.b) * this.energy;
@@ -2165,7 +2165,7 @@
 	}
 
 
-	Proton.Util.inherits(GravityWell, Proton.Behaviour);
+	Proton.Util.inherits(GravityWell, Proton.Behavior);
 	GravityWell.prototype.reset = function(centerPoint, force, life, easing) {
 		this.distanceVec = new Proton.Vector2D();
 		this.centerPoint = Proton.Util.initValue(centerPoint, new Proton.Vector2D);
@@ -2177,7 +2177,7 @@
 
 	};
 
-	GravityWell.prototype.applyBehaviour = function(particle, time, index) {
+	GravityWell.prototype.applyBehavior = function(particle, time, index) {
 		this.distanceVec.set(this.centerPoint.x - particle.p.x, this.centerPoint.y - particle.p.y);
 		var distanceSq = this.distanceVec.lengthSq();
 		if (distanceSq != 0) {
@@ -2209,7 +2209,7 @@
 	function Emitter(pObj) {
 		this.initializes = [];
 		this.particles = [];
-		this.behaviours = [];
+		this.behaviors = [];
 		this.emitTime = 0;
 		this.emitTotalTimes = -1;
 		/**
@@ -2290,9 +2290,9 @@
 	 * can use emit({x:10},new Gravity(10),{'particleUpdate',fun}) or emit([{x:10},new Initialize],new Gravity(10),{'particleUpdate',fun})
 	 * @method removeAllParticles
 	 */
-	Emitter.prototype.createParticle = function(initialize, behaviour) {
+	Emitter.prototype.createParticle = function(initialize, behavior) {
 		var particle = Proton.pool.get();
-		this.setupParticle(particle, initialize, behaviour);
+		this.setupParticle(particle, initialize, behavior);
 		this.dispatchEvent(new Proton.Event({
 			type : Proton.PARTICLE_CREATED,
 			particle : particle
@@ -2343,36 +2343,36 @@
 		Proton.Util.destroyArray(this.initializes);
 	};
 	/**
-	 * add the Behaviour to particles;
+	 * add the Behavior to particles;
 	 * 
-	 * you can use Behaviours array:emitter.addBehaviour(Behaviour1,Behaviour2,Behaviour3);
-	 * @method addBehaviour
-	 * @param {Proton.Behaviour} behaviour like this new Proton.Color('random')
+	 * you can use Behaviors array:emitter.addBehavior(Behavior1,Behavior2,Behavior3);
+	 * @method addBehavior
+	 * @param {Proton.Behavior} behavior like this new Proton.Color('random')
 	 */
-	Emitter.prototype.addBehaviour = function() {
+	Emitter.prototype.addBehavior = function() {
 		var length = arguments.length, i;
 		for ( i = 0; i < length; i++) {
-			this.behaviours.push(arguments[i]);
+			this.behaviors.push(arguments[i]);
 			if (arguments[i].hasOwnProperty("parents"))
 				arguments[i].parents.push(this);
 		}
 	};
 	/**
-	 * remove the Behaviour
-	 * @method removeBehaviour
-	 * @param {Proton.Behaviour} behaviour a behaviour
+	 * remove the Behavior
+	 * @method removeBehavior
+	 * @param {Proton.Behavior} behavior a behavior
 	 */
-	Emitter.prototype.removeBehaviour = function(behaviour) {
-		var index = this.behaviours.indexOf(behaviour);
+	Emitter.prototype.removeBehavior = function(behavior) {
+		var index = this.behaviors.indexOf(behavior);
 		if (index > -1)
-			this.behaviours.splice(index, 1);
+			this.behaviors.splice(index, 1);
 	};
 	/**
-	 * remove all behaviours
-	 * @method removeAllBehaviours
+	 * remove all behaviors
+	 * @method removeAllBehaviors
 	 */
-	Emitter.prototype.removeAllBehaviours = function() {
-		Proton.Util.destroyArray(this.behaviours);
+	Emitter.prototype.removeAllBehaviors = function() {
+		Proton.Util.destroyArray(this.behaviors);
 	};
 
 	Emitter.prototype.integrate = function(time) {
@@ -2433,9 +2433,9 @@
 		}
 	};
 
-	Emitter.prototype.setupParticle = function(particle, initialize, behaviour) {
+	Emitter.prototype.setupParticle = function(particle, initialize, behavior) {
 		var initializes = this.initializes;
-		var behaviours = this.behaviours;
+		var behaviors = this.behaviors;
 
 		if (initialize) {
 			if ( initialize instanceof Array)
@@ -2444,29 +2444,29 @@
 				initializes = [initialize];
 		}
 
-		if (behaviour) {
-			if ( behaviour instanceof Array)
-				behaviours = behaviour;
+		if (behavior) {
+			if ( behavior instanceof Array)
+				behaviors = behavior;
 			else
-				behaviours = [behaviour];
+				behaviors = [behavior];
 		}
 
 		Proton.InitializeUtil.initialize(this, particle, initializes);
-		particle.addBehaviours(behaviours);
+		particle.addBehaviors(behaviors);
 		particle.parent = this;
 		this.particles.push(particle);
 	};
 
 	/**
-	 * Destory this Emitter
-	 * @method destory
+	 * Destroy this Emitter
+	 * @method destroy
 	 */
 	Emitter.prototype.destroy = function() {
 		this.dead = true;
 		this.emitTotalTimes = -1;
 		if (this.particles.length == 0) {
 			this.removeInitializers();
-			this.removeAllBehaviours();
+			this.removeAllBehaviors();
 
 			if (this.parent)
 				this.parent.removeEmitter(this);
@@ -2478,55 +2478,55 @@
 
 
 	/**
-	 * The BehaviourEmitter class inherits from Proton.Emitter
+	 * The BehaviorEmitter class inherits from Proton.Emitter
 	 *
-	 * use the BehaviourEmitter you can add behaviours to self;
-	 * @class Proton.BehaviourEmitter
+	 * use the BehaviorEmitter you can add behaviors to self;
+	 * @class Proton.BehaviorEmitter
 	 * @constructor
 	 * @param {Object} pObj the parameters object;
 	 */
-	function BehaviourEmitter(pObj) {
-		this.selfBehaviours = [];
-		BehaviourEmitter._super_.call(this, pObj);
+	function BehaviorEmitter(pObj) {
+		this.selfBehaviors = [];
+		BehaviorEmitter._super_.call(this, pObj);
 	};
 
-	Proton.Util.inherits(BehaviourEmitter, Proton.Emitter);
+	Proton.Util.inherits(BehaviorEmitter, Proton.Emitter);
 	/**
-	 * add the Behaviour to emitter;
+	 * add the Behavior to emitter;
 	 *
-	 * you can use Behaviours array:emitter.addSelfBehaviour(Behaviour1,Behaviour2,Behaviour3);
-	 * @method addSelfBehaviour
-	 * @param {Proton.Behaviour} behaviour like this new Proton.Color('random')
+	 * you can use Behaviors array:emitter.addSelfBehavior(Behavior1,Behavior2,Behavior3);
+	 * @method addSelfBehavior
+	 * @param {Proton.Behavior} behavior like this new Proton.Color('random')
 	 */
-	BehaviourEmitter.prototype.addSelfBehaviour = function() {
+	BehaviorEmitter.prototype.addSelfBehavior = function() {
 		var length = arguments.length, i;
 		for ( i = 0; i < length; i++) {
-			this.selfBehaviours.push(arguments[i]);
+			this.selfBehaviors.push(arguments[i]);
 		}
 	};
 	/**
-	 * remove the Behaviour for self
-	 * @method removeSelfBehaviour
-	 * @param {Proton.Behaviour} behaviour a behaviour
+	 * remove the Behavior for self
+	 * @method removeSelfBehavior
+	 * @param {Proton.Behavior} behavior a behavior
 	 */
-	BehaviourEmitter.prototype.removeSelfBehaviour = function(behaviour) {
-		var index = this.selfBehaviours.indexOf(behaviour);
+	BehaviorEmitter.prototype.removeSelfBehavior = function(behavior) {
+		var index = this.selfBehaviors.indexOf(behavior);
 		if (index > -1)
-			this.selfBehaviours.splice(index, 1);
+			this.selfBehaviors.splice(index, 1);
 	};
 
-	BehaviourEmitter.prototype.update = function(time) {
-		BehaviourEmitter._super_.prototype.update.call(this, time);
+	BehaviorEmitter.prototype.update = function(time) {
+		BehaviorEmitter._super_.prototype.update.call(this, time);
 
 		if (!this.sleep) {
-			var length = this.selfBehaviours.length, i;
+			var length = this.selfBehaviors.length, i;
 			for ( i = 0; i < length; i++) {
-				this.selfBehaviours[i].applyBehaviour(this, time, i)
+				this.selfBehaviors[i].applyBehavior(this, time, i)
 			}
 		}
 	}
 
-	Proton.BehaviourEmitter = BehaviourEmitter;
+	Proton.BehaviorEmitter = BehaviorEmitter;
 
 
 
@@ -2593,8 +2593,8 @@
 			FollowEmitter._super_.prototype.emit.call(this, 'once');
 	};
 	/**
-	 * Destory this Emitter
-	 * @method destory
+	 * Destroy this Emitter
+	 * @method destroy
 	 */
 	FollowEmitter.prototype.destroy = function() {
 		FollowEmitter._super_.prototype.destroy.call(this);

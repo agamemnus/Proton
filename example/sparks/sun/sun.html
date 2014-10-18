@@ -70,11 +70,11 @@
 				emitter.addInitialize(new Proton.Position(new Proton.PointZone(canvas.width / 2, canvas.height / 2)));
 				emitter.addInitialize(new Proton.Life(1, 1.7));
 				emitter.addInitialize(new Proton.V(new Proton.Span(3, 5), new Proton.Span(0, 360), 'polar'));
-				emitter.addBehaviour(new Proton.Color('#ff0000', '#ffff00'));
+				emitter.addBehavior(new Proton.Color('#ff0000', '#ffff00'));
 				attractionForce = new Proton.Attraction(mouseObj, 10, 200);
-				emitter.addBehaviour(attractionForce);
-				emitter.addBehaviour(new Proton.Scale(Proton.getSpan(1, 1.6), Proton.getSpan(0, .1)));
-				emitter.addBehaviour(new Proton.Alpha(1, .2));
+				emitter.addBehavior(attractionForce);
+				emitter.addBehavior(new Proton.Scale(Proton.getSpan(1, 1.6), Proton.getSpan(0, .1)));
+				emitter.addBehavior(new Proton.Alpha(1, .2));
 				emitter.emit();
 				proton.addEmitter(emitter);
 

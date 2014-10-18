@@ -16,7 +16,7 @@
 	function Emitter(pObj) {
 		this.initializes = [];
 		this.particles = [];
-		this.behaviours = [];
+		this.behaviors = [];
 		this.emitTime = 0;
 		this.emitTotalTimes = -1;
 		/**
@@ -97,9 +97,9 @@
 	 * can use emit({x:10},new Gravity(10),{'particleUpdate',fun}) or emit([{x:10},new Initialize],new Gravity(10),{'particleUpdate',fun})
 	 * @method removeAllParticles
 	 */
-	Emitter.prototype.createParticle = function(initialize, behaviour) {
+	Emitter.prototype.createParticle = function(initialize, behavior) {
 		var particle = Proton.pool.get();
-		this.setupParticle(particle, initialize, behaviour);
+		this.setupParticle(particle, initialize, behavior);
 		this.dispatchEvent(new Proton.Event({
 			type : Proton.PARTICLE_CREATED,
 			particle : particle
@@ -150,36 +150,36 @@
 		Proton.Util.destroyArray(this.initializes);
 	};
 	/**
-	 * add the Behaviour to particles;
+	 * add the Behavior to particles;
 	 * 
-	 * you can use Behaviours array:emitter.addBehaviour(Behaviour1,Behaviour2,Behaviour3);
-	 * @method addBehaviour
-	 * @param {Proton.Behaviour} behaviour like this new Proton.Color('random')
+	 * you can use Behaviors array:emitter.addBehavior(Behavior1,Behavior2,Behavior3);
+	 * @method addBehavior
+	 * @param {Proton.Behavior} behavior like this new Proton.Color('random')
 	 */
-	Emitter.prototype.addBehaviour = function() {
+	Emitter.prototype.addBehavior = function() {
 		var length = arguments.length, i;
 		for ( i = 0; i < length; i++) {
-			this.behaviours.push(arguments[i]);
+			this.behaviors.push(arguments[i]);
 			if (arguments[i].hasOwnProperty("parents"))
 				arguments[i].parents.push(this);
 		}
 	};
 	/**
-	 * remove the Behaviour
-	 * @method removeBehaviour
-	 * @param {Proton.Behaviour} behaviour a behaviour
+	 * remove the Behavior
+	 * @method removeBehavior
+	 * @param {Proton.Behavior} behavior a behavior
 	 */
-	Emitter.prototype.removeBehaviour = function(behaviour) {
-		var index = this.behaviours.indexOf(behaviour);
+	Emitter.prototype.removeBehavior = function(behavior) {
+		var index = this.behaviors.indexOf(behavior);
 		if (index > -1)
-			this.behaviours.splice(index, 1);
+			this.behaviors.splice(index, 1);
 	};
 	/**
-	 * remove all behaviours
-	 * @method removeAllBehaviours
+	 * remove all behaviors
+	 * @method removeAllBehaviors
 	 */
-	Emitter.prototype.removeAllBehaviours = function() {
-		Proton.Util.destroyArray(this.behaviours);
+	Emitter.prototype.removeAllBehaviors = function() {
+		Proton.Util.destroyArray(this.behaviors);
 	};
 
 	Emitter.prototype.integrate = function(time) {
@@ -240,9 +240,9 @@
 		}
 	};
 
-	Emitter.prototype.setupParticle = function(particle, initialize, behaviour) {
+	Emitter.prototype.setupParticle = function(particle, initialize, behavior) {
 		var initializes = this.initializes;
-		var behaviours = this.behaviours;
+		var behaviors = this.behaviors;
 
 		if (initialize) {
 			if ( initialize instanceof Array)
@@ -251,29 +251,29 @@
 				initializes = [initialize];
 		}
 
-		if (behaviour) {
-			if ( behaviour instanceof Array)
-				behaviours = behaviour;
+		if (behavior) {
+			if ( behavior instanceof Array)
+				behaviors = behavior;
 			else
-				behaviours = [behaviour];
+				behaviors = [behavior];
 		}
 
 		Proton.InitializeUtil.initialize(this, particle, initializes);
-		particle.addBehaviours(behaviours);
+		particle.addBehaviors(behaviors);
 		particle.parent = this;
 		this.particles.push(particle);
 	};
 
 	/**
-	 * Destory this Emitter
-	 * @method destory
+	 * Destroy this Emitter
+	 * @method destroy
 	 */
 	Emitter.prototype.destroy = function() {
 		this.dead = true;
 		this.emitTotalTimes = -1;
 		if (this.particles.length == 0) {
 			this.removeInitializers();
-			this.removeAllBehaviours();
+			this.removeAllBehaviors();
 
 			if (this.parent)
 				this.parent.removeEmitter(this);

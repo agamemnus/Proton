@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>proton.js-behaviour-custom</title>
+		<title>proton.js-behavior-custom</title>
 		<meta charset="utf-8">
 		<style type="text/css">
 			body {
@@ -162,10 +162,10 @@
 				emitter.addInitialize(new Proton.ImageTarget(blood));
 				emitter.addInitialize(new Proton.Life(1));
 				emitter.addInitialize(new Proton.Velocity(new Proton.Span(1, 2), new Proton.Span(0, 80, true), 'polar'));
-				emitter.addBehaviour(new Proton.Alpha(1, 0));
-				emitter.addBehaviour(new Proton.Gravity(3));
-				emitter.addBehaviour(new Proton.Rotate());
-				emitter.addBehaviour(new Proton.Scale(0, Proton.getSpan(0.3, 0.5), Infinity, Proton.easeOutCubic));
+				emitter.addBehavior(new Proton.Alpha(1, 0));
+				emitter.addBehavior(new Proton.Gravity(3));
+				emitter.addBehavior(new Proton.Rotate());
+				emitter.addBehavior(new Proton.Scale(0, Proton.getSpan(0.3, 0.5), Infinity, Proton.easeOutCubic));
 				proton.addEmitter(emitter);
 			}
 

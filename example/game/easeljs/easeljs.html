@@ -195,10 +195,10 @@
 				emitter.addInitialize(new Proton.Life(1.5));
 				emitter.addInitialize(new Proton.Velocity(new Proton.Span(1, 2), new Proton.Span(-90, 20, true), 'polar'));
 
-				emitter.addBehaviour(new Proton.Rotate(new Proton.Span(0, 360), new Proton.Span([-10, -5, 5, 15, 10]), 'add'));
-				emitter.addBehaviour(new Proton.Scale(new Proton.Span(.3, .5), 0.2));
-				emitter.addBehaviour(new Proton.RandomDrift(5, 0, .15));
-				emitter.addBehaviour(new Proton.Alpha(1, 0));
+				emitter.addBehavior(new Proton.Rotate(new Proton.Span(0, 360), new Proton.Span([-10, -5, 5, 15, 10]), 'add'));
+				emitter.addBehavior(new Proton.Scale(new Proton.Span(.3, .5), 0.2));
+				emitter.addBehavior(new Proton.RandomDrift(5, 0, .15));
+				emitter.addBehavior(new Proton.Alpha(1, 0));
 				emitter.emit();
 				proton.addEmitter(emitter);
 

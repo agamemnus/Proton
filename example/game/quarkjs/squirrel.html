@@ -143,10 +143,10 @@
 				emitter.addInitialize(new Proton.Life(1, 2));
 				emitter.addInitialize(new Proton.Velocity(Proton.getSpan(5, 9), Proton.getSpan(-20, 20), 'polar'));
 
-				emitter.addBehaviour(new Proton.Gravity(8));
-				emitter.addBehaviour(new Proton.Scale(Proton.getSpan(.5, 1), 0));
-				emitter.addBehaviour(new Proton.Alpha(1, 0.5));
-				emitter.addBehaviour(new Proton.Rotate(0, Proton.getSpan(-2, 2), 'add'));
+				emitter.addBehavior(new Proton.Gravity(8));
+				emitter.addBehavior(new Proton.Scale(Proton.getSpan(.5, 1), 0));
+				emitter.addBehavior(new Proton.Alpha(1, 0.5));
+				emitter.addBehavior(new Proton.Rotate(0, Proton.getSpan(-2, 2), 'add'));
 				proton.addEmitter(emitter);
 			}
 
@@ -158,9 +158,9 @@
 				rainEmitter.addInitialize(new Proton.Position(new Proton.LineZone(0, -40, 800, -40)));
 				rainEmitter.addInitialize(new Proton.Life(10, 12));
 
-				rainEmitter.addBehaviour(new Proton.Gravity(3));
-				rainEmitter.addBehaviour(new Proton.Scale(Proton.getSpan(.3, 1)));
-				rainEmitter.addBehaviour(new Proton.CrossZone(new Proton.LineZone(-150, 620, 900, 620, 'down'), 'dead'));
+				rainEmitter.addBehavior(new Proton.Gravity(3));
+				rainEmitter.addBehavior(new Proton.Scale(Proton.getSpan(.3, 1)));
+				rainEmitter.addBehavior(new Proton.CrossZone(new Proton.LineZone(-150, 620, 900, 620, 'down'), 'dead'));
 				proton.addEmitter(rainEmitter);
 				rainEmitter.emit();
 			}

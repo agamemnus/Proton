@@ -54,25 +54,25 @@
 			function createProton() {
 				var texture = new PIXI.Texture.fromImage("image/bunny.png");
 				proton = new Proton();
-				emitter = new Proton.BehaviourEmitter();
+				emitter = new Proton.BehaviorEmitter();
 				emitter.rate = new Proton.Rate(new Proton.Span(15, 30), new Proton.Span(.2, .5));
 				emitter.addInitialize(new Proton.Mass(1));
 				emitter.addInitialize(new Proton.ImageTarget(texture));
 				emitter.addInitialize(new Proton.Life(2, 3));
 				emitter.addInitialize(new Proton.Velocity(new Proton.Span(3, 9), new Proton.Span(0, 30, true), 'polar'));
 
-				emitter.addBehaviour(new Proton.Gravity(8));
-				emitter.addBehaviour(new Proton.Scale(new Proton.Span(1, 3), 0.3));
-				emitter.addBehaviour(new Proton.Alpha(1, 0.5));
-				emitter.addBehaviour(new Proton.Rotate(0, Proton.getSpan(-8, 9), 'add'));
+				emitter.addBehavior(new Proton.Gravity(8));
+				emitter.addBehavior(new Proton.Scale(new Proton.Span(1, 3), 0.3));
+				emitter.addBehavior(new Proton.Alpha(1, 0.5));
+				emitter.addBehavior(new Proton.Rotate(0, Proton.getSpan(-8, 9), 'add'));
 				emitter.p.x = 1003 / 2;
 				emitter.p.y = 100;
 				emitter.emit();
 				proton.addEmitter(emitter);
 
-				emitter.addSelfBehaviour(new Proton.Gravity(5));
-				emitter.addSelfBehaviour(new Proton.RandomDrift(30, 30, .1));
-				emitter.addSelfBehaviour(new Proton.CrossZone(new Proton.RectZone(50, 0, 953, 610), 'bound'));
+				emitter.addSelfBehavior(new Proton.Gravity(5));
+				emitter.addSelfBehavior(new Proton.RandomDrift(30, 30, .1));
+				emitter.addSelfBehavior(new Proton.CrossZone(new Proton.RectZone(50, 0, 953, 610), 'bound'));
 			}
 
 			function createRender() {

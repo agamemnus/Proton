@@ -78,10 +78,10 @@
 				emitter.addInitialize(new Proton.ImageTarget(['image/particle.png'], 32));
 				emitter.addInitialize(new Proton.Radius(40));
 				emitter.addInitialize(new Proton.V(new Proton.Span(1, 3), 65, 'polar'));
-				emitter.addBehaviour(new Proton.Alpha(1, 0));
-				emitter.addBehaviour(new Proton.Color('#4F1500', '#0029FF'));
-				emitter.addBehaviour(new Proton.Scale(3, 0.1));
-				emitter.addBehaviour(new Proton.CrossZone(new Proton.RectZone(0, 0, 1003, 610), 'dead'));
+				emitter.addBehavior(new Proton.Alpha(1, 0));
+				emitter.addBehavior(new Proton.Color('#4F1500', '#0029FF'));
+				emitter.addBehavior(new Proton.Scale(3, 0.1));
+				emitter.addBehavior(new Proton.CrossZone(new Proton.RectZone(0, 0, 1003, 610), 'dead'));
 				emitter.p.x = 1003 / 2;
 				emitter.p.y = 610 / 2;
 				emitter.emit();

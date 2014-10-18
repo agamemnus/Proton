@@ -36,7 +36,7 @@
 			var emitter;
 			var stats;
 			var index;
-			var randomBehaviour;
+			var randomBehavior;
 			var gravity;
 			
 			Main();
@@ -83,15 +83,15 @@
 				emitter.addInitialize(new Proton.Life(2));
 				var imagedata = context.getImageData(rect.x, rect.y, rect.width, rect.height);
 				emitter.addInitialize(new Proton.P(new Proton.ImageZone(imagedata, rect.x, rect.y + 50)));
-				//addBehaviour
+				//addBehavior
 
-				randomBehaviour = new Proton.RandomDrift(2, 2, .2);
+				randomBehavior = new Proton.RandomDrift(2, 2, .2);
 				gravity = new Proton.Gravity(0);
-				emitter.addBehaviour(customScaleBehaviour());
-				emitter.addBehaviour(gravity);
-				emitter.addBehaviour(randomBehaviour);
-				emitter.addBehaviour(new Proton.Color(['#00aeff', '#0fa954', '#54396e', '#e61d5f']));
-				emitter.addBehaviour(new Proton.CrossZone(new Proton.RectZone(0, 0, canvas.width, canvas.height), 'collision'));
+				emitter.addBehavior(customScaleBehavior());
+				emitter.addBehavior(gravity);
+				emitter.addBehavior(randomBehavior);
+				emitter.addBehavior(new Proton.Color(['#00aeff', '#0fa954', '#54396e', '#e61d5f']));
+				emitter.addBehavior(new Proton.CrossZone(new Proton.RectZone(0, 0, canvas.width, canvas.height), 'collision'));
 				emitter.emit();
 				//add emitter
 				proton.addEmitter(emitter);
@@ -107,25 +107,25 @@
 				window.addEventListener('mousedown', function(e) {
 					index++;
 					if (index % 3 == 1) {
-						randomBehaviour.reset(2, 0, .2);
+						randomBehavior.reset(2, 0, .2);
 						gravity.reset(1.5);
 					} else if (index % 3 == 2) {
-						randomBehaviour.reset(50, 50, .1);
+						randomBehavior.reset(50, 50, .1);
 						gravity.reset(0);
 					} else {
-						randomBehaviour.reset(2, 2, .2);
+						randomBehavior.reset(2, 2, .2);
 						gravity.reset(0);
 					}
 				});
 			}
 
-			function customScaleBehaviour() {
+			function customScaleBehavior() {
 				return {
 					initialize : function(particle) {
 						particle.oldRadius = particle.radius;
 						particle.scale = 0;
 					},
-					applyBehaviour : function(particle) {
+					applyBehavior : function(particle) {
 						if (particle.energy >= 2 / 3) {
 							particle.scale = (1 - particle.energy) * 3;
 						} else if (particle.energy <= 1 / 3) {
