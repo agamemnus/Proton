@@ -132,7 +132,7 @@
 		destroy : function() {
 			var length = this.emitters.length;
 			for (var i = 0; i < length; i++) {
-				if (these.emitters[i]) {this.emitters[i].destroy(); delete this.emitters[i];}
+				if (this.emitters[i]) {this.emitters[i].destroy(); delete this.emitters[i];}
 			}
 
 			this.emitters = [];
